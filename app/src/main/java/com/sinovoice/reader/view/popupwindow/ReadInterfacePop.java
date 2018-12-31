@@ -2,7 +2,6 @@
 package com.sinovoice.reader.view.popupwindow;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
@@ -12,19 +11,15 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.sinovoice.reader.MApplication;
+import com.sinovoice.reader.view.activity.BookReadActivity;
 import com.sinovoice.reader.R;
 import com.sinovoice.reader.help.ReadBookControl;
-import com.sinovoice.reader.view.activity.ReadBookActivity;
-import com.sinovoice.reader.view.activity.ReadStyleActivity;
-import com.sinovoice.reader.widget.font.FontSelector;
 import com.sinovoice.reader.widget.number.NumberButton;
 import com.sinovoice.reader.widget.page.animation.PageAnimation;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
-import pub.devrel.easypermissions.EasyPermissions;
 
 public class ReadInterfacePop extends FrameLayout {
 
@@ -69,7 +64,7 @@ public class ReadInterfacePop extends FrameLayout {
     @BindView(R.id.nbParagraphSize)
     NumberButton nbParagraphSize;
 
-    private ReadBookActivity activity;
+    private BookReadActivity activity;
     private ReadBookControl readBookControl = ReadBookControl.getInstance();
     private OnChangeProListener changeProListener;
 
@@ -95,7 +90,7 @@ public class ReadInterfacePop extends FrameLayout {
         view.setOnClickListener(null);
     }
 
-    public void setListener(ReadBookActivity readBookActivity, @NonNull OnChangeProListener changeProListener) {
+    public void setListener(BookReadActivity readBookActivity, @NonNull OnChangeProListener changeProListener) {
         this.activity = readBookActivity;
         this.changeProListener = changeProListener;
         initData();
@@ -232,30 +227,30 @@ public class ReadInterfacePop extends FrameLayout {
 
         //选择字体
         fl_text_font.setOnClickListener(view -> {
-            if (EasyPermissions.hasPermissions(activity, MApplication.PerList)) {
-                new FontSelector(activity, readBookControl.getFontPath())
-                        .setListener(new FontSelector.OnThisListener() {
-                            @Override
-                            public void setDefault() {
-                                clearFontPath();
-                            }
-
-                            @Override
-                            public void setFontPath(String fontPath) {
-                                setReadFonts(fontPath);
-                            }
-                        })
-                        .create()
-                        .show();
-            } else {
-                EasyPermissions.requestPermissions(activity, "读取字体需要存储权限", MApplication.RESULT__PERMS, MApplication.PerList);
-            }
+//            if (EasyPermissions.hasPermissions(activity, MApplication.PerList)) {
+//                new FontSelector(activity, readBookControl.getFontPath())
+//                        .setListener(new FontSelector.OnThisListener() {
+//                            @Override
+//                            public void setDefault() {
+//                                clearFontPath();
+//                            }
+//
+//                            @Override
+//                            public void setFontPath(String fontPath) {
+//                                setReadFonts(fontPath);
+//                            }
+//                        })
+//                        .create()
+//                        .show();
+//            } else {
+//                EasyPermissions.requestPermissions(activity, "读取字体需要存储权限", MApplication.RESULT__PERMS, MApplication.PerList);
+//            }
         });
 
         //长按清除字体
         fl_text_font.setOnLongClickListener(view -> {
             clearFontPath();
-            activity.toast(R.string.clear_font);
+//            activity.toast(R.string.clear_font);
             return true;
         });
 
@@ -263,9 +258,9 @@ public class ReadInterfacePop extends FrameLayout {
 
     //自定义阅读样式
     private boolean customReadStyle(int index) {
-        Intent intent = new Intent(activity, ReadStyleActivity.class);
-        intent.putExtra("index", index);
-        activity.startActivity(intent);
+//        Intent intent = new Intent(activity, ReadStyleActivity.class);
+//        intent.putExtra("index", index);
+//        activity.startActivity(intent);
         return false;
     }
 

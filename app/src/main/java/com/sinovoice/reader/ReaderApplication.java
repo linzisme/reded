@@ -13,11 +13,8 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 
-import com.sinovoice.reader.help.AppFrontBackHelper;
-import com.sinovoice.reader.help.Constant;
 import com.sinovoice.reader.help.CrashHandler;
 import com.sinovoice.reader.help.FileHelp;
-import com.sinovoice.reader.model.UpLastChapterModel;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -71,32 +68,32 @@ public class ReaderApplication extends Application {
         }
         configPreferences = getSharedPreferences("CONFIG", 0);
         cookiePreferences = getSharedPreferences("COOKIE", 0);
-        downloadPath = configPreferences.getString(getString(R.string.pk_download_path), "");
-        if (TextUtils.isEmpty(downloadPath)) {
-            setDownloadPath(FileHelp.getCachePath());
-        }
-        AppFrontBackHelper frontBackHelper = new AppFrontBackHelper();
-        frontBackHelper.register(this, new AppFrontBackHelper.OnAppStatusListener() {
-            @Override
-            public void onFront() {
-                donateHb = System.currentTimeMillis() - configPreferences.getLong("DonateHb", 0) <= TimeUnit.DAYS.toMillis(3);
-            }
-
-            @Override
-            public void onBack() {
-                if (UpLastChapterModel.model != null) {
-                    UpLastChapterModel.model.onDestroy();
-                }
-            }
-        });
+//        downloadPath = configPreferences.getString(getString(R.string.pk_download_path), "");
+//        if (TextUtils.isEmpty(downloadPath)) {
+//            setDownloadPath(FileHelp.getCachePath());
+//        }
+//        AppFrontBackHelper frontBackHelper = new AppFrontBackHelper();
+//        frontBackHelper.register(this, new AppFrontBackHelper.OnAppStatusListener() {
+//            @Override
+//            public void onFront() {
+//                donateHb = System.currentTimeMillis() - configPreferences.getLong("DonateHb", 0) <= TimeUnit.DAYS.toMillis(3);
+//            }
+//
+//            @Override
+//            public void onBack() {
+//                if (UpLastChapterModel.model != null) {
+//                    UpLastChapterModel.model.onDestroy();
+//                }
+//            }
+//        });
     }
 
     public void setDownloadPath(String downloadPath) {
-        ReaderApplication.downloadPath = downloadPath;
-        Constant.BOOK_CACHE_PATH = ReaderApplication.downloadPath + File.separator + "book_cache" + File.separator;
-        SharedPreferences.Editor editor = configPreferences.edit();
-        editor.putString(getString(R.string.pk_download_path), downloadPath);
-        editor.apply();
+//        ReaderApplication.downloadPath = downloadPath;
+//        Constant.BOOK_CACHE_PATH = ReaderApplication.downloadPath + File.separator + "book_cache" + File.separator;
+//        SharedPreferences.Editor editor = configPreferences.edit();
+//        editor.putString(getString(R.string.pk_download_path), downloadPath);
+//        editor.apply();
     }
 
     public SharedPreferences getConfigPreferences() {

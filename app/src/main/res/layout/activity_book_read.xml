@@ -6,15 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-<!--
-    &lt;!&ndash;阅读页面&ndash;&gt;
-    <com.kunfei.bookshelf.widget.page.PageView
+
+    <com.sinovoice.reader.widget.page.PageView
         android:id="@+id/pageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clickable="true"
         android:focusable="true"
-        tools:visibility="gone" />-->
+        tools:visibility="gone" />
 
     <FrameLayout
         android:id="@+id/fl_menu"

@@ -11,7 +11,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
 
-import com.sinovoice.reader.MApplication;
+import com.sinovoice.reader.ReaderApplication;
 import com.sinovoice.reader.utils.BitmapUtil;
 
 import java.util.ArrayList;
@@ -19,7 +19,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.sinovoice.reader.widget.page.PageLoader.DEFAULT_MARGIN_WIDTH;
 
 public class ReadBookControl {
     private static final int DEFAULT_BG = 1;
@@ -35,6 +34,7 @@ public class ReadBookControl {
     private float paragraphSize;
     private int pageMode;
     private Bitmap bgBitmap;
+    private static int DEFAULT_MARGIN_WIDTH = 10;
 
     private int textDrawableIndex = DEFAULT_BG;
 
@@ -77,7 +77,7 @@ public class ReadBookControl {
 
 
     private ReadBookControl() {
-        readPreference = MApplication.getInstance().getConfigPreferences();
+        readPreference = ReaderApplication.getInstance().getConfigPreferences();
         initTextDrawable();
         updateReaderSettings();
     }
@@ -174,7 +174,7 @@ public class ReadBookControl {
         if (getBgCustom(textDrawableIndex) == 2 && getBgPath(textDrawableIndex) != null) {
             bgIsColor = false;
             String bgPath = getBgPath(textDrawableIndex);
-            Resources resources = MApplication.getInstance().getResources();
+            Resources resources = ReaderApplication.getInstance().getResources();
             DisplayMetrics dm = resources.getDisplayMetrics();
             int width = dm.widthPixels;
             int height = dm.heightPixels;
