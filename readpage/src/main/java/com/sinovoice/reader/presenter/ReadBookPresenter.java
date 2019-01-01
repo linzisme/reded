@@ -35,13 +35,17 @@ import com.sinovoice.reader.model.BookSourceManager;
 import com.sinovoice.reader.model.ImportBookModel;
 import com.sinovoice.reader.model.WebBookModel;
 import com.sinovoice.reader.presenter.contract.ReadBookContract;
+import com.sinovoice.reader.utils.RxUtils;
 
 import java.io.File;
 import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class ReadBookPresenter extends BasePresenterImpl<ReadBookContract.View> implements ReadBookContract.Presenter {
@@ -51,6 +55,7 @@ public class ReadBookPresenter extends BasePresenterImpl<ReadBookContract.View> 
     private int open_from;
     private BookShelfBean bookShelf;
     private BookSourceBean bookSourceBean;
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     @Override
     public void initData(Activity activity) {
@@ -64,6 +69,36 @@ public class ReadBookPresenter extends BasePresenterImpl<ReadBookContract.View> 
             mView.upMenu();
         }
     }
+
+    public void importBooks(List<File> books) {
+        Observable.fromIterable(books)
+                .flatMap(file -> ImportBookModel.getInstance().importBook(file))
+                .compose(RxUtils::toSimpleSingle)
+                .subscribe(new Observer<LocBookShelfBean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        compositeDisposable.add(d);
+                    }
+
+                    @Override
+                    public void onNext(LocBookShelfBean value) {
+                        if (value.getNew()) {
+                            RxBus.get().post(RxBusTag.HAD_ADD_BOOK, value.getBookShelfBean());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
 
     private void loadBook(Intent intent) {
         Observable.create((ObservableOnSubscribe<BookShelfBean>) e -> {

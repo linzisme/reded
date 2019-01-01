@@ -54,6 +54,8 @@ import com.sinovoice.reader.widget.page.PageView;
 import com.sinovoice.reader.widget.page.TxtChapter;
 import com.sinovoice.reader.widget.page.animation.PageAnimation;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -377,6 +379,10 @@ public class BookReadActivity extends MBaseActivity<ReadBookContract.Presenter> 
         ButterKnife.bind(this);
         this.setSupportActionBar(toolbar);
         setupActionBar();
+        List<File> files = new ArrayList<>();
+        File file = new File("/storage/emulated/0/Download/三寸人间.txt");
+        files.add(file);
+        mPresenter.importBooks(files);
         mPresenter.initData(this);
         llISB.setPadding(0, ImmersionBar.getStatusBarHeight(this), 0, 0);
         llMenuBottom.setFabNightTheme(isNightTheme());

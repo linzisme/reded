@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/basemvplib/basemvplib.iml" filepath="$PROJECT_DIR$/basemvplib/basemvplib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/readpage/readpage.iml" filepath="$PROJECT_DIR$/readpage/readpage.iml" />
       <module fileurl="file://$PROJECT_DIR$/reded.iml" filepath="$PROJECT_DIR$/reded.iml" />
     </modules>
   </component>

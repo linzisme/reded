@@ -10,6 +10,9 @@ import com.sinovoice.reader.bean.BookmarkBean;
 import com.sinovoice.reader.bean.SearchBookBean;
 import com.sinovoice.reader.presenter.ReadBookPresenter;
 
+import java.io.File;
+import java.util.List;
+
 public interface ReadBookContract {
     interface View extends IView {
 
@@ -60,6 +63,8 @@ public interface ReadBookContract {
         void removeFromShelf();
 
         void initData(Activity activity);
+
+        void importBooks(List<File> books);
 
         void openBookFromOther(Activity activity);
 

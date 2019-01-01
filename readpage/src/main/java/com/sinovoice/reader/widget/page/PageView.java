@@ -428,7 +428,7 @@ public class PageView extends View {
         } else {
             String fileSuffix = FileHelp.getFileSuffix(bookShelfBean.getNoteUrl());
             if (fileSuffix.equalsIgnoreCase(FileHelp.SUFFIX_EPUB)) {
-//                mPageLoader = new PageLoaderEpub(this, bookShelfBean);
+                mPageLoader = new PageLoaderEpub(this, bookShelfBean);
             } else {
                 mPageLoader = new PageLoaderText(this, bookShelfBean);
             }
